@@ -27,7 +27,8 @@ app.get('/admin', (req, res) => {
 });
 
 // Fallback for any other routes to index.html (SPA style)
-app.get('/*', (req, res) => {
+// Using app.use as a catch-all to avoid strict path-to-regexp errors
+app.use((req, res) => {
   res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
 
