@@ -27,7 +27,7 @@ app.get('/admin', (req, res) => {
 });
 
 // Fallback for any other routes to index.html (SPA style)
-app.get('*', (req, res) => {
+app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
 
