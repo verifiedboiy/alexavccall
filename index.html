@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Secure Voip Terminal</title>
+  <link rel="stylesheet" href="./style.css" />
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+  <div id="registration-overlay">
+    <div class="reg-card">
+      <h2 style="margin-bottom: 0.5rem;">Secure Registration</h2>
+      <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 2rem;">Register to access the secure communication line.</p>
+      
+      <form id="reg-form">
+        <div class="form-group">
+          <label>Full Name</label>
+          <input type="text" id="reg-name" placeholder="John Doe" required />
+        </div>
+        <div class="form-group">
+          <label>Country</label>
+          <select id="reg-country" required>
+            <option value="">Select Country</option>
+            <option value="UK">United Kingdom</option>
+            <option value="US">United States</option>
+            <option value="CA">Canada</option>
+            <option value="FR">France</option>
+            <option value="DE">Germany</option>
+          </select>
+        </div>
+        <button type="submit" class="btn-primary">Register Secure Line</button>
+      </form>
+
+      <div id="assigning-number" style="display: none; margin-top: 2rem; text-align: center;">
+        <div class="spinner"></div>
+        <p class="mono" style="font-size: 0.8rem;">Assigning Secure US Routing Number...</p>
+      </div>
+
+      <div id="assigned-number-display" style="display: none; margin-top: 2rem; text-align: center;">
+        <p style="color: var(--text-muted); font-size: 0.75rem; text-transform: uppercase;">Your Secure US ID:</p>
+        <h1 id="user-us-id" class="mono" style="color: var(--accent-blue); margin: 0.5rem 0;"></h1>
+        <p style="font-size: 0.85rem;">Connecting to standby...</p>
+        <button id="go-to-lobby" class="btn-primary" style="margin-top: 1rem;">Enter Standby Lobby</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="app-container">
+    <header class="header">
+      <div style="display: flex; align-items: center; gap: 1rem;">
+        <i data-lucide="shield" style="color: var(--accent-blue);"></i>
+        <h2 style="font-size: 1.1rem; letter-spacing: 0.05em;">SECURE TERMINAL</h2>
+      </div>
+      <div class="status-badge">
+        <div class="status-dot online"></div>
+        <span id="terminal-status">Line Ready</span>
+      </div>
+    </header>
+
+    <main class="call-interface">
+      <video id="remote-video" autoplay playsinline></video>
+      
+      <div id="lag-overlay">
+        <div class="spinner"></div>
+        <h3 class="mono">RECONNECTING...</h3>
+        <p style="color: var(--text-muted); font-size: 0.8rem;">Unstable network detected. Please wait.</p>
+      </div>
+
+      <div id="local-video-preview">
+        <div class="monitor-label">Local Feed</div>
+        <video id="local-video" autoplay playsinline muted></video>
+      </div>
+
+      <div class="control-bar">
+        <button class="control-btn"><i data-lucide="mic"></i></button>
+        <button class="control-btn"><i data-lucide="video"></i></button>
+        <button class="control-btn end-call"><i data-lucide="phone-off"></i></button>
+      </div>
+    </main>
+
+    <div id="diagnostic-panel" style="position: absolute; top: 5rem; right: 2rem; text-align: right; pointer-events: none;">
+      <p class="mono" style="font-size: 0.7rem; color: var(--accent-green);">ENCRYPTION: AES-256</p>
+      <p class="mono" style="font-size: 0.7rem; color: var(--text-muted);">LATENCY: <span id="ping-val">24ms</span></p>
+      <p class="mono" style="font-size: 0.7rem; color: var(--text-muted);">ROUTING: US-EAST-01</p>
+    </div>
+  </div>
+
+  <script type="module" src="./src/main.js"></script>
+  <script>lucide.createIcons();</script>
+</body>
+</html>
